@@ -5,7 +5,7 @@ Plugin Name: DM Directory
 Plugin URI: http://www.designmissoula.com/
 Description: This is not just a plugin, it makes WordPress better.
 Author: Bradford Knowlton
-Version: 1.6.5
+Version: 1.6.6
 Author URI: http://bradknowlton.com/
 */
 
@@ -174,7 +174,7 @@ function dm_github_plugin_updater_test_init() {
 
 		$config = array(
 			'slug' => plugin_basename( __FILE__ ),
-			'proper_folder_name' => 'DM-users',
+			'proper_folder_name' => 'DM-directory',
 			'api_url' => 'https://api.github.com/repos/DesignMissoula/DM-directory/contents/',
 			'github_url' => 'https://github.com/DesignMissoula/DM-directory',
 			'zip_url' => 'https://api.github.com/repos/DesignMissoula/DM-directory/zipball/gcsaa-groups',
