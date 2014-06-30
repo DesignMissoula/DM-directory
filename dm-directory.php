@@ -5,7 +5,7 @@ Plugin Name: DM Directory
 Plugin URI: http://www.designmissoula.com/
 Description: This is not just a plugin, it makes WordPress better.
 Author: Bradford Knowlton
-Version: 1.6.7
+Version: 1.6.8
 Author URI: http://bradknowlton.com/
 */
 
