@@ -130,8 +130,6 @@ function user_directory_shortcode( $atts ){
         $html .= '</div><!-- end entry -->';
     }
 	
-	// $html .= "</table>";
-	
 	$html .= "</div> <!-- end directory -->";
 	
 	return $html;
