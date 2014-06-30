@@ -9,44 +9,6 @@ Version: 1.6
 Author URI: http://bradknowlton.com/
 */
 
-/*
-add_action( 'init', 'register_cpt_directory' );
-    function register_cpt_directory() {
-    $labels = array(
-    'name' => _x( 'Directories', 'directory' ),
-    'singular_name' => _x( 'Directory', 'directory' ),
-    'add_new' => _x( 'Add New', 'directory' ),
-    'add_new_item' => _x( 'Add New Directory', 'directory' ),
-    'edit_item' => _x( 'Edit Directory', 'directory' ),
-    'new_item' => _x( 'New Directory', 'directory' ),
-    'view_item' => _x( 'View Directory', 'directory' ),
-    'search_items' => _x( 'Search Directories', 'directory' ),
-    'not_found' => _x( 'No directories found', 'directory' ),
-    'not_found_in_trash' => _x( 'No directories found in Trash', 'directory' ),
-    'parent_item_colon' => _x( 'Parent Directory:', 'directory' ),
-    'menu_name' => _x( 'Directories', 'directory' ),
-    );
-    $args = array(
-    'labels' => $labels,
-    'hierarchical' => true,
-    'supports' => array( 'title', 'editor' ),
-    'public' => true,
-    'show_ui' => true,
-    'show_in_menu' => true,
-    'show_in_nav_menus' => true,
-    'publicly_queryable' => true,
-    'exclude_from_search' => false,
-    'has_archive' => true,
-    'query_var' => true,
-    'can_export' => true,
-    'rewrite' => true,
-    'capability_type' => 'post'
-    );
-    register_post_type( 'directory', $args );
-    }
-*/
-
-
 function init_directory(){
 	
 	$result = add_role(
@@ -64,7 +26,6 @@ function init_directory(){
 
 register_activation_hook( __FILE__, 'init_directory' );
 
-
 function user_directory_shortcode( $atts ){
 	extract( shortcode_atts( array(
 		'user_level' => 'member',
@@ -77,11 +38,7 @@ function user_directory_shortcode( $atts ){
 	 $html .= "<h2>$title</h2>";
 	
 	$html .= '<div class="membership-directory"> <!-- end directory -->';
-	
-	// $html .= "<table class='membership-directory'>";
-	
-	// $html .= "<tr><th></th><th>First Name</th><th>Last Name</th><th>Email Address</th><th></th></tr>";
-	
+		
 	if(isset($_GET['position_title']) && "" != $_GET['position_title'] && isset($_GET['course_company']) && "" != $_GET['course_company']){
 
 		$args = array( 
@@ -157,7 +114,13 @@ function user_directory_shortcode( $atts ){
        $html .= '<span>Preferred work number #1 and #2:</span> <a href="tel:'.$user->work_tele_1.'">'.format_phone($user->work_tele_1).' </a> <a href="tel:'.$user->work_tele_2.'">'.format_phone($user->work_tele_2).'</a><br/>';
        $html .= '<span>Cell Phone:</span> <a href="tel:'.$user->cell_phone.'">'.format_phone($user->cell_phone).'</a><br/>';
        $html .= '<span>Fax Number:</span> <a href="tel:'.$user->fax_number.'">'.format_phone($user->fax_number).'</a><br/>';
-       $html .= '<span>Email Address:</span> <a href="mailto:'.$user->user_email.'">'.$user->user_email.'</a><br/>';
+       
+       $domain = str_ireplace('www.', '', parse_url(get_site_url(), PHP_URL_HOST));
+       
+       if( !stristr($user->user_email, '@'.$domain) ){
+	   	$html .= '<span>Email Address:</span> <a href="mailto:'.$user->user_email.'">'.$user->user_email.'</a><br/>';    
+       }
+       
        $html .= '<span>GCSAA Member:</span> '.(("" != $user->gcsaa_member)?'yes':'no').'<br/>';
        $html .= '<span>Pesticide License:</span> '.$user->pesticide_license.'<br/>';
        $html .= '<span>Services Offered:</span> '.$user->services_offered.'<br/>';
