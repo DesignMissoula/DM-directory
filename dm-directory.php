@@ -6,7 +6,7 @@ Plugin URI: http://www.designmissoula.com/
 Description: This is not just a plugin, it makes WordPress better.
 Author: Bradford Knowlton
 Author URI: http://bradknowlton.com/
-Version: 1.7.3
+Version: 1.8.1
 License:           GNU General Public License v2
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 Domain Path:       /languages
@@ -143,7 +143,6 @@ function user_directory_shortcode( $atts ){
 }
 add_shortcode( 'user_directory', 'user_directory_shortcode' );
 
-
 add_filter('pp_eu_exclude_data', 'exclude_data', 15);
 
 function exclude_data(){
@@ -152,21 +151,15 @@ function exclude_data(){
 }
 
 
-    function format_phone($phone)
-    {
-    $phone = preg_replace("/[^0-9]/", "", $phone);
-     
-    if(strlen($phone) == 7)
-    return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $phone);
-    elseif(strlen($phone) == 10)
-    return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "($1) $2-$3", $phone);
-    else
-    return $phone;
-    }
-    
-    
-if( $_GET['update_plugins'] == "github" ){
-	define( 'WP_GITHUB_FORCE_UPDATE', true );
-}else{
-	define( 'WP_GITHUB_FORCE_UPDATE', false );
+function format_phone($phone)
+{
+	$phone = preg_replace("/[^0-9]/", "", $phone);
+	 
+	if(strlen($phone) == 7)
+	return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $phone);
+	elseif(strlen($phone) == 10)
+	return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "($1) $2-$3", $phone);
+	else
+	return $phone;
 }
+
