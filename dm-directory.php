@@ -5,8 +5,14 @@ Plugin Name: DM Directory
 Plugin URI: http://www.designmissoula.com/
 Description: This is not just a plugin, it makes WordPress better.
 Author: Bradford Knowlton
-Version: 1.6.8
 Author URI: http://bradknowlton.com/
+Version: 1.7.3
+License:           GNU General Public License v2
+License URI:       http://www.gnu.org/licenses/gpl-2.0.html
+Domain Path:       /languages
+Text Domain:       DM-directory
+GitHub Plugin URI: https://github.com/DesignMissoula/DM-directory
+GitHub Branch:     gcsaa-groups
 */
 
 function init_directory(){
@@ -164,31 +170,3 @@ if( $_GET['update_plugins'] == "github" ){
 }else{
 	define( 'WP_GITHUB_FORCE_UPDATE', false );
 }
-
-add_action( 'init', 'dm_github_plugin_updater_directory_init' );
-
-function dm_github_plugin_updater_directory_init() {
-
-	include_once plugin_dir_path( __FILE__ ) . 'includes/github-updater.php';
-
-	if ( is_admin() ) { // note the use of is_admin() to double check that this is happening in the admin
-
-		$config = array(
-			'slug' => plugin_basename( __FILE__ ),
-			'proper_folder_name' => 'DM-directory',
-			'api_url' => 'https://api.github.com/repos/DesignMissoula/DM-directory/contents/',
-			'github_url' => 'https://github.com/DesignMissoula/DM-directory',
-			'zip_url' => 'https://api.github.com/repos/DesignMissoula/DM-directory/zipball/gcsaa-groups',
-			'sslverify' => true,
-			'requires' => '3.8',
-			'tested' => '3.9.1',
-			'readme' => 'README.md',
-			'access_token' => '', 
-			'branch' => 'gcsaa-groups',
-		);
-
-		new WP_GitHub_Updater( $config );
-
-	}
-
-}    
