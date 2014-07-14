@@ -5,8 +5,10 @@ Plugin Name: DM Directory
 Plugin URI: http://www.designmissoula.com/
 Description: This is not just a plugin, it makes WordPress better.
 Author: Bradford Knowlton
-Version: 1.6
+Version: 1.7
 Author URI: http://bradknowlton.com/
+GitHub Plugin URI: https://github.com/DesignMissoula/DM-directory
+GitHub Branch:     gcsaa-groups
 */
 
 /*
@@ -126,13 +128,13 @@ function user_directory_shortcode( $atts ){
 		<label for="position_title">Position</label>
 		<select id="position_title" name="position_title">
 			<?php foreach($position_values as $value){
-			echo '<option value="'.$value.'">'.$value.'</option>';
+			echo '<option value="'.urlencode($value).'">'.$value.'</option>';
 			}?>
 		</select>
 		<label for="course_company">Company</label>
 		<select id="course_company" name="course_company">
 			<?php foreach($company_values as $value){
-			echo '<option value="'.$value.'">'.$value.'</option>';
+			echo '<option value="'.urlencode($value).'">'.$value.'</option>';
 			}?>
 		</select>
 		<input type="submit" value="Filter" />
